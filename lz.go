@@ -12,5 +12,9 @@ func Encode(buf []byte) []Run {
 
 func Decode(buf []Run) []byte {
 	var out []byte
+	for _, run := range buf {
+		out = append(out, out[run.Offset:run.Offset+run.Len]...)
+		out = append(out, run.Ch)
+	}
 	return out
 }
